@@ -1,6 +1,8 @@
 package ericdiaz.program.topviewsightseeingcodingchallenge.repository
 
+import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
 import ericdiaz.program.topviewsightseeingcodingchallenge.network.WeatherService
+import io.reactivex.Single
 import javax.inject.Inject
 
 class WeatherNetworkRepository(@Inject val weatherService: WeatherService) {
@@ -14,7 +16,7 @@ class WeatherNetworkRepository(@Inject val weatherService: WeatherService) {
     fun getWeatherResponse(
         latitude: Double,
         longitude: Double
-    ) {
-        weatherService.getWeatherResponse(SECRET_KEY, latitude, longitude, UNITS, EXCLUSIONS)
+    ): Single<WeatherResponse> {
+       return weatherService.getWeatherResponse(SECRET_KEY, latitude, longitude, UNITS, EXCLUSIONS)
     }
 }
