@@ -8,7 +8,7 @@ import javax.inject.Inject
 @Suppress("UNCHECKED_CAST")
 class WeatherViewModelFactory @Inject constructor(private val weatherNetworkRepository: WeatherNetworkRepository)
     : ViewModelProvider.Factory {
-    
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(WeatherViewModel::class.java)) {
             WeatherViewModel(weatherNetworkRepository) as T

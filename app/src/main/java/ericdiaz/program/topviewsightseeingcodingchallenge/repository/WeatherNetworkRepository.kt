@@ -5,7 +5,7 @@ import ericdiaz.program.topviewsightseeingcodingchallenge.network.WeatherService
 import io.reactivex.Single
 import javax.inject.Inject
 
-class WeatherNetworkRepository(@Inject val weatherService: WeatherService) {
+class WeatherNetworkRepository @Inject constructor(private val weatherService: WeatherService) {
 
     companion object {
         private const val SECRET_KEY = "fe835d57e4500beca2f741375c7f1900"
