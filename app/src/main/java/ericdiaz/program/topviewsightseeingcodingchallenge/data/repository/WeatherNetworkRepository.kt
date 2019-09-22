@@ -1,9 +1,17 @@
 package ericdiaz.program.topviewsightseeingcodingchallenge.data.repository
 
-import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
 import ericdiaz.program.topviewsightseeingcodingchallenge.data.network.WeatherService
+import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
 import io.reactivex.Single
 import javax.inject.Inject
+
+/**
+ * A Repository for conducting network operations to API
+ *
+ * Created 9/21/19
+ *
+ * @author Eric Diaz
+ */
 
 class WeatherNetworkRepository @Inject constructor(private val weatherService: WeatherService) {
 
@@ -17,6 +25,6 @@ class WeatherNetworkRepository @Inject constructor(private val weatherService: W
         latitude: Double,
         longitude: Double
     ): Single<WeatherResponse> {
-       return weatherService.getWeatherResponse(SECRET_KEY, latitude, longitude, UNITS, EXCLUSIONS)
+        return weatherService.getWeatherResponse(SECRET_KEY, latitude, longitude, UNITS, EXCLUSIONS)
     }
 }

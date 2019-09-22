@@ -9,9 +9,9 @@ import com.google.android.gms.tasks.OnSuccessListener
 import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getLocation
 import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getMilliSeconds
 import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.isNetworkConnected
-import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
 import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherDatabaseRepository
 import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherNetworkRepository
+import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -20,6 +20,13 @@ import java.text.DateFormat
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * A ViewModel for managing data communication between data layer and view layer
+ *
+ * Created - 09/21/19
+ *
+ * @author Eric Diaz
+ */
 
 class WeatherViewModel @Inject constructor(
     application: Application,
@@ -42,6 +49,11 @@ class WeatherViewModel @Inject constructor(
         getWeather()
     }
 
+    /**
+     * Makes network call based on availability of location and network state.
+     * If there is no network or location available, it will try to pull from
+     * cache.
+     */
     private fun getWeather() {
         val applicationContext = getApplication<Application>().applicationContext
 
@@ -55,10 +67,14 @@ class WeatherViewModel @Inject constructor(
             },
             OnFailureListener {
                 weatherData.value = State.Failure(it, StateDescriptor.LOCATION_ERROR)
+                getCachedWeatherResponse()
             }
         )
     }
 
+    /**
+     * Database will store data async onSuccess
+     */
     private fun getWeatherResponse(latitude: Double, longitude: Double) {
         weatherData.value = State.Loading
 
@@ -113,7 +129,7 @@ class WeatherViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        super.onCleared()
         disposables.dispose()
+        super.onCleared()
     }
 }

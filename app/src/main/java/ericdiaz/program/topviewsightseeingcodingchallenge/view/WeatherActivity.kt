@@ -23,6 +23,13 @@ import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.WeatherViewM
 import kotlinx.android.synthetic.main.activity_weather_layout.*
 import javax.inject.Inject
 
+/**
+ * Weather Activity to display weather data
+ *
+ * Created : 9/21/19
+ *
+ * @author Eric Diaz
+ */
 class WeatherActivity : AppCompatActivity() {
 
     @Inject

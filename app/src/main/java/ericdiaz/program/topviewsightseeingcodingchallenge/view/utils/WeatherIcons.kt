@@ -1,5 +1,12 @@
 package ericdiaz.program.topviewsightseeingcodingchallenge.view.utils
 
+/**
+ * WeatherIcon-link map for images
+ *
+ * Created 9/22/19
+ *
+ * @author Eric Diaz
+ */
 object WeatherIcons {
 
     val weatherIconMap: MutableMap<String, String> = mutableMapOf()
