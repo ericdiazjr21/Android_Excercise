@@ -21,13 +21,10 @@ class PermissionActivity : AppCompatActivity() {
 
     private fun checkLocationPermission() {
         if (checkSelfPermission(this, ACCESS_FINE_LOCATION) == PERMISSION_GRANTED) {
+
             startWeatherActivity()
         } else {
-            requestPermissions(
-                this,
-                arrayOf(ACCESS_FINE_LOCATION),
-                PERMISSION_REQUEST_ID
-            )
+            requestPermissions(this, arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_ID)
         }
     }
 

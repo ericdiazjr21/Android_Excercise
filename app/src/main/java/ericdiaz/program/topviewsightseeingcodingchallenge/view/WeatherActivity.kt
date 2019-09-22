@@ -101,28 +101,26 @@ class WeatherActivity : AppCompatActivity() {
 
     private fun loadDataIntoViews(state: State.Success) {
 
-        with(state) {
-            val weatherResponse = this.weatherResponse
+        val weatherResponse = state.weatherResponse
+        val currentWeather = weatherResponse.currentWeather
 
-            weatherResponse.currentWeather.let {
-                Picasso.get().load(WeatherIcons.weatherIconMap[it.iconId])
-                    .into(current_weather_icon_image_view)
+        weatherResponse.let {
+            current_location_text_view.text = it.location
 
-                last_updated_text_view.text = it.date.formatLastUpdated()
-
-                current_temperature_text_view.text = it.temperature.getTempFormat()
-            }
-
-            weatherResponse.let {
-                current_location_text_view.text = it.location
-                weatherAdapter.addData(it.dailyForecast.eightDayForecast)
-            }
-
-            showSnackBar(this.stateDescriptor)
+            weatherAdapter.addData(it.dailyForecast.eightDayForecast)
         }
 
-    }
+        currentWeather.let {
+            Picasso.get().load(WeatherIcons.weatherIconMap[it.iconId])
+                .into(current_weather_icon_image_view)
 
+            last_updated_text_view.text = it.date.formatLastUpdated()
+
+            current_temperature_text_view.text = it.temperature.getTempFormat()
+        }
+
+        showSnackBar(state.stateDescriptor)
+    }
 
     private fun showWeatherViews() {
         current_location_text_view.visibility = View.VISIBLE
