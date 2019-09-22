@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">TopViewSightseeingCodingChallenge</string>
+    <string name="icon">icon</string>
+    <string name="no_location">Location not Available</string>
+    <string name="data_error">Network/Database Error</string>
+    <string name="primary_key">singleEntry</string>
+    <string name="refresh">Refresh</string>
+    <string name="low_temp">L %s°</string>
+    <string name="high_temp">H %s°</string>
+    <string name="ones_place_decimal">%.1f</string>
+    <string name="current_icon_weather">current_icon_weather</string>
+    <string name="degree">%s°</string>
+    <string name="no_data_available">No Data Available</string>
+    <string name="last_updated">Last updated: %s</string>
 </resources>
