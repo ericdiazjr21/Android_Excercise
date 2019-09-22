@@ -1,4 +1,4 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.network
+package ericdiaz.program.topviewsightseeingcodingchallenge.data.network
 
 import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
 import io.reactivex.Single

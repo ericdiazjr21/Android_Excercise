@@ -12,8 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import ericdiaz.program.topviewsightseeingcodingchallenge.R
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.formatLastUpdated
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getTempFormat
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.formatLastUpdated
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getTempFormat
 import ericdiaz.program.topviewsightseeingcodingchallenge.view.recyclerview.WeatherAdapter
 import ericdiaz.program.topviewsightseeingcodingchallenge.view.utils.WeatherIcons
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.State

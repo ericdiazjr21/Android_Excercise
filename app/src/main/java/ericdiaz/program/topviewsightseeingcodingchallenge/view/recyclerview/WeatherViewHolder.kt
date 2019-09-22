@@ -3,10 +3,10 @@ package ericdiaz.program.topviewsightseeingcodingchallenge.view.recyclerview
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getDay
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getHighTempFormat
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getLowTempFormat
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getMilliSeconds
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getDay
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getHighTempFormat
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getLowTempFormat
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getMilliSeconds
 import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeekdayWeather
 import ericdiaz.program.topviewsightseeingcodingchallenge.view.utils.WeatherIcons
 import kotlinx.android.synthetic.main.weekday_weather_item_view.view.*

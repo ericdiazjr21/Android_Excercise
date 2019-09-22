@@ -1,4 +1,4 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.extensions
+package ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions
 
 fun String.getDay(): String {
 

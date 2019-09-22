@@ -1,8 +1,8 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.network.di
+package ericdiaz.program.topviewsightseeingcodingchallenge.data.network.di
 
 import dagger.Module
 import dagger.Provides
-import ericdiaz.program.topviewsightseeingcodingchallenge.network.WeatherService
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.network.WeatherService
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

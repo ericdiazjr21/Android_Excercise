@@ -1,7 +1,7 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.repository
+package ericdiaz.program.topviewsightseeingcodingchallenge.data.repository
 
 import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
-import ericdiaz.program.topviewsightseeingcodingchallenge.network.WeatherService
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.network.WeatherService
 import io.reactivex.Single
 import javax.inject.Inject
 

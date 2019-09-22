@@ -1,4 +1,4 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.di
+package ericdiaz.program.topviewsightseeingcodingchallenge.common.di
 
 import android.content.Context
 import dagger.Module

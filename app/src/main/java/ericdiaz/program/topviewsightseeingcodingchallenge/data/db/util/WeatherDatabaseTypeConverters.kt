@@ -1,4 +1,4 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.db.util
+package ericdiaz.program.topviewsightseeingcodingchallenge.data.db.util
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

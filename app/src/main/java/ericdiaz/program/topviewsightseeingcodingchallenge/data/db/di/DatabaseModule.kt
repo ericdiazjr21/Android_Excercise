@@ -1,11 +1,11 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.db.di
+package ericdiaz.program.topviewsightseeingcodingchallenge.data.db.di
 
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import ericdiaz.program.topviewsightseeingcodingchallenge.db.WeatherDatabase
-import ericdiaz.program.topviewsightseeingcodingchallenge.db.WeatherResponseDAO
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.db.WeatherDatabase
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.db.WeatherResponseDAO
 import javax.inject.Singleton
 
 @Module

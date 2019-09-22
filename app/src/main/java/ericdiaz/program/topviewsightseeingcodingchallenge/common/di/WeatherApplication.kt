@@ -1,4 +1,4 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.di
+package ericdiaz.program.topviewsightseeingcodingchallenge.common.di
 
 import android.app.Application
 import dagger.android.AndroidInjector
@@ -23,6 +23,4 @@ class WeatherApplication : Application(), HasAndroidInjector {
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
     }
-
-
 }

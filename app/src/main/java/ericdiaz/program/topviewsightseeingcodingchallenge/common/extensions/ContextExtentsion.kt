@@ -1,4 +1,4 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.extensions
+package ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions
 
 import android.content.Context
 import android.location.Location

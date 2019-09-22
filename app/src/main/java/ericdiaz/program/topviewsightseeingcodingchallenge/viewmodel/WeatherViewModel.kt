@@ -6,12 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getLocation
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getMilliSeconds
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.isNetworkConnected
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getLocation
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.getMilliSeconds
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.extensions.isNetworkConnected
 import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
-import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherDatabaseRepository
-import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherNetworkRepository
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherDatabaseRepository
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherNetworkRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
