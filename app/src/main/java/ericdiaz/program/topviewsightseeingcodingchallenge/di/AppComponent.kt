@@ -2,6 +2,7 @@ package ericdiaz.program.topviewsightseeingcodingchallenge.di
 
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import ericdiaz.program.topviewsightseeingcodingchallenge.network.di.NetworkModule
 import ericdiaz.program.topviewsightseeingcodingchallenge.repository.di.RepositoryModule
 import javax.inject.Singleton
@@ -11,7 +12,8 @@ import javax.inject.Singleton
     modules = [
         NetworkModule::class,
         AppModule::class,
-        RepositoryModule::class]
+        RepositoryModule::class,
+        AndroidInjectionModule::class]
 )
 interface AppComponent {
 

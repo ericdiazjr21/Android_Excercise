@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 
 class WeatherViewModel @Inject constructor(
-    private val weatherNetworkRepository: WeatherNetworkRepository,
-    application: Application
+    application: Application,
+    private val weatherNetworkRepository: WeatherNetworkRepository
 ) : AndroidViewModel(application) {
 
     private val disposables: CompositeDisposable = CompositeDisposable()
