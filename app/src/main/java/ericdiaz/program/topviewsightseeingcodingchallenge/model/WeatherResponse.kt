@@ -8,6 +8,6 @@ data class WeatherResponse(
     val location: String,
     @SerializedName("currently")
     val currentWeather: CurrentWeather,
-    @SerializedName("dailyForecast")
+    @SerializedName("daily")
     val dailyForecast: DailyForecast
 )

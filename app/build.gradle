@@ -15,6 +15,10 @@ android {
         targetSdkVersion 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
+    }
 }
 
 dependencies {
@@ -67,4 +71,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+// kapt not generating compile sourceCompatibility properly for dagger
+// reference https://github.com/google/dagger/issues/1449 for more details.
+if (project.hasProperty('kapt')) {
+    // Reference for 'kapt' DSL: https://kotlinlang.org/docs/reference/kapt.html#java-compiler-options
+    kapt {
+        javacOptions {
+            option("-source", "8")
+            option("-target", "8")
+        }
+    }
 }

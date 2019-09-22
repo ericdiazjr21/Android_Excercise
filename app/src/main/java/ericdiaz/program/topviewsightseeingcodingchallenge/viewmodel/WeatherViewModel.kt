@@ -1,7 +1,9 @@
 package ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -9,23 +11,32 @@ import ericdiaz.program.topviewsightseeingcodingchallenge.di.WeatherApplication
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getLocation
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.isNetworkConnected
 import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherNetworkRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import java.text.DateFormat
 import java.util.*
 import javax.inject.Inject
 
 
-class WeatherViewModel @Inject constructor(
-    application: Application,
+class WeatherViewModel @Inject constructor(application: Application,
     private val weatherNetworkRepository: WeatherNetworkRepository
 ) : AndroidViewModel(application) {
 
     private val disposables: CompositeDisposable = CompositeDisposable()
-    val weatherData: MutableLiveData<State> = MutableLiveData()
+    private val weatherData: MutableLiveData<State> = MutableLiveData()
 
-    fun getWeather() {
-        val applicationContext = getApplication<WeatherApplication>().applicationContext
+    init {
+        getWeather()
+    }
+
+    fun getWeatherData():LiveData<State>{
+        return weatherData
+    }
+
+    private fun getWeather() {
+        val applicationContext = getApplication<Application>().applicationContext
 
         applicationContext.getLocation(
             OnSuccessListener { location ->
@@ -50,6 +61,7 @@ class WeatherViewModel @Inject constructor(
                 }
                 return@map response
             }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
                     weatherData.value = State.Success(it, StateDescriptor.FROM_NETWORK)
