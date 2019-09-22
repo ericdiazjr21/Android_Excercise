@@ -25,8 +25,10 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherViewHolder>() {
     }
 
     fun addData(weekdayWeathers: List<WeekdayWeather>) {
-        this.weekdayWeathers.clear()
-        this.weekdayWeathers.addAll(weekdayWeathers)
+        this.weekdayWeathers.let {
+            it.clear()
+            it.addAll(weekdayWeathers)
+        }
         notifyItemRangeChanged(0, weekdayWeathers.size - 1)
     }
 }

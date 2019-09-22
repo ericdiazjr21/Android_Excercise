@@ -21,7 +21,6 @@ class DatabaseModule {
         }
     }
 
-
     @Singleton
     @Provides
     fun providesWeatherResponseDAO(weatherDatabase: WeatherDatabase): WeatherResponseDAO {

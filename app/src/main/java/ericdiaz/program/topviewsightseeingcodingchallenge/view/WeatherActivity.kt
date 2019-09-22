@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import ericdiaz.program.topviewsightseeingcodingchallenge.R
+import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.formatLastUpdated
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getTempFormat
 import ericdiaz.program.topviewsightseeingcodingchallenge.view.recyclerview.WeatherAdapter
 import ericdiaz.program.topviewsightseeingcodingchallenge.view.utils.WeatherIcons
@@ -36,9 +37,36 @@ class WeatherActivity : AppCompatActivity() {
 
         initRecyclerView()
 
+        initWeatherViewModel()
+
+        getWeatherData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        weatherViewModel.refreshWeatherData()
+        return true
+    }
+
+    private fun initRecyclerView() {
+        weatherAdapter = WeatherAdapter()
+
+        daily_forecast_recycler_view.apply {
+            adapter = weatherAdapter
+            layoutManager = LinearLayoutManager(this@WeatherActivity)
+        }
+    }
+
+    private fun initWeatherViewModel() {
         weatherViewModel =
             ViewModelProviders.of(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
+    }
 
+    private fun getWeatherData() {
         weatherViewModel
             .getWeatherData()
             .observe(this, Observer<State> { state ->
@@ -71,25 +99,6 @@ class WeatherActivity : AppCompatActivity() {
             })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        weatherViewModel.refreshWeatherData()
-        return true
-    }
-
-    private fun initRecyclerView() {
-        weatherAdapter = WeatherAdapter()
-
-        daily_forecast_recycler_view.apply {
-            adapter = weatherAdapter
-            layoutManager = LinearLayoutManager(this@WeatherActivity)
-        }
-    }
-
     private fun loadDataIntoViews(state: State.Success) {
 
         with(state) {
@@ -99,7 +108,7 @@ class WeatherActivity : AppCompatActivity() {
                 Picasso.get().load(WeatherIcons.weatherIconMap[it.iconId])
                     .into(current_weather_icon_image_view)
 
-                last_updated_text_view.text = it.date
+                last_updated_text_view.text = it.date.formatLastUpdated()
 
                 current_temperature_text_view.text = it.temperature.getTempFormat()
             }

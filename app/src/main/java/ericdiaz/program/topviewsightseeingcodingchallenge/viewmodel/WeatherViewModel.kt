@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getLocation
+import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getMilliSeconds
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.isNetworkConnected
 import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
 import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherDatabaseRepository
@@ -67,7 +68,7 @@ class WeatherViewModel @Inject constructor(
                 run {
                     response.currentWeather.date = DateFormat
                         .getDateTimeInstance()
-                        .format(Date(response.currentWeather.unixTime.times(1000)))
+                        .format(Date(response.currentWeather.unixTime.getMilliSeconds()))
 
                     response.responseId = "Single_Entry_Response"
                 }

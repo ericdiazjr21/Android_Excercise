@@ -11,6 +11,5 @@ data class CurrentWeather(
     @SerializedName("icon")
     val iconId: String,
 
-    @SerializedName("temperature")
     val temperature: Double
 )

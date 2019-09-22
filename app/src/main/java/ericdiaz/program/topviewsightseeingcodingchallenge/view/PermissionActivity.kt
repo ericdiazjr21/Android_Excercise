@@ -10,7 +10,9 @@ import androidx.core.content.ContextCompat.checkSelfPermission
 
 class PermissionActivity : AppCompatActivity() {
 
-    private val permissionRequestId = 23
+    companion object {
+        private const val PERMISSION_REQUEST_ID = 23
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +26,7 @@ class PermissionActivity : AppCompatActivity() {
             requestPermissions(
                 this,
                 arrayOf(ACCESS_FINE_LOCATION),
-                permissionRequestId
+                PERMISSION_REQUEST_ID
             )
         }
     }

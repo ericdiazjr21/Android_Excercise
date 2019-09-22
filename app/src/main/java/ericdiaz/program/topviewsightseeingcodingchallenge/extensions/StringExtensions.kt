@@ -14,6 +14,10 @@ fun String.getDay(): String {
     }
 }
 
+fun String.formatLastUpdated(): String {
+    return "Last Updated: ${this}"
+}
+
 fun Double.getTempFormat(): String {
     return String.format("%.1f", this).let { "$it°" }
 }
@@ -21,6 +25,7 @@ fun Double.getTempFormat(): String {
 fun Double.getHighTempFormat(): String {
     return String.format("%.1f", this).let { "H $it°" }
 }
+
 fun Double.getLowTempFormat(): String {
     return String.format("%.1f", this).let { "L $it°" }
 }
