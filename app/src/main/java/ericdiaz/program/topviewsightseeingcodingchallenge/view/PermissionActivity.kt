@@ -8,6 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat.checkSelfPermission
 
+/**
+ * An Activity to get user location permission, if denied app will close
+ *
+ * Created 09/21/19
+ *
+ * @author Eric Diaz
+ */
 class PermissionActivity : AppCompatActivity() {
 
     companion object {
@@ -21,13 +28,10 @@ class PermissionActivity : AppCompatActivity() {
 
     private fun checkLocationPermission() {
         if (checkSelfPermission(this, ACCESS_FINE_LOCATION) == PERMISSION_GRANTED) {
+
             startWeatherActivity()
         } else {
-            requestPermissions(
-                this,
-                arrayOf(ACCESS_FINE_LOCATION),
-                PERMISSION_REQUEST_ID
-            )
+            requestPermissions(this, arrayOf(ACCESS_FINE_LOCATION), PERMISSION_REQUEST_ID)
         }
     }
 
