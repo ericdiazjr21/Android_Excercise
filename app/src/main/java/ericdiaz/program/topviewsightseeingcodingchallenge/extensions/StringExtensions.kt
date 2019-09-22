@@ -13,3 +13,14 @@ fun String.getDay(): String {
         else -> "Error"
     }
 }
+
+fun Double.getTempFormat(): String {
+    return String.format("%.1f", this).let { "$it°" }
+}
+
+fun Double.getHighTempFormat(): String {
+    return String.format("%.1f", this).let { "H $it°" }
+}
+fun Double.getLowTempFormat(): String {
+    return String.format("%.1f", this).let { "L $it°" }
+}

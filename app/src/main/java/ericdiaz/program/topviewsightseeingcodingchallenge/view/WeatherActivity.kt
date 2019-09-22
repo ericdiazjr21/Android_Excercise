@@ -1,6 +1,8 @@
 package ericdiaz.program.topviewsightseeingcodingchallenge.view
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -9,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.AndroidInjection
 import ericdiaz.program.topviewsightseeingcodingchallenge.R
+import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getHighTempFormat
+import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getTempFormat
 import ericdiaz.program.topviewsightseeingcodingchallenge.view.recyclerview.WeatherAdapter
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.State
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.StateDescriptor
@@ -34,8 +38,9 @@ class WeatherActivity : AppCompatActivity() {
         weatherViewModel =
             ViewModelProviders.of(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
 
-        weatherViewModel.getWeatherData().observe(this,
-            Observer<State> { state ->
+        weatherViewModel
+            .getWeatherData()
+            .observe(this, Observer<State> { state ->
                 when (state) {
                     is State.Success -> {
                         hideProgressBar()
@@ -65,6 +70,16 @@ class WeatherActivity : AppCompatActivity() {
             })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        weatherViewModel.refreshWeatherData()
+        return true
+    }
+
     private fun initRecyclerView() {
         weatherAdapter = WeatherAdapter()
 
@@ -85,7 +100,7 @@ class WeatherActivity : AppCompatActivity() {
 
         current_location_text_view.text = weatherResponse.location
         last_updated_text_view.text = currentWeather.date
-        current_temperature_text_view.text = currentWeather.temperature.toString()
+        current_temperature_text_view.text = currentWeather.temperature.getTempFormat()
 
         weatherAdapter.addData(state.weatherResponse.dailyForecast.eightDayForecast)
     }
