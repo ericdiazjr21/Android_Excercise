@@ -2,9 +2,9 @@ package ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.di
 
 import dagger.Module
 import dagger.Provides
-import ericdiaz.program.topviewsightseeingcodingchallenge.di.WeatherApplication
-import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherDatabaseRepository
-import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherNetworkRepository
+import ericdiaz.program.topviewsightseeingcodingchallenge.common.di.WeatherApplication
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherDatabaseRepository
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherNetworkRepository
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.WeatherViewModelFactory
 import javax.inject.Singleton
 

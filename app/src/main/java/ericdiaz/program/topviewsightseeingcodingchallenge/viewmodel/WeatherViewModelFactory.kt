@@ -3,9 +3,8 @@ package ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ericdiaz.program.topviewsightseeingcodingchallenge.di.WeatherApplication
-import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherDatabaseRepository
-import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherNetworkRepository
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherDatabaseRepository
+import ericdiaz.program.topviewsightseeingcodingchallenge.data.repository.WeatherNetworkRepository
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")

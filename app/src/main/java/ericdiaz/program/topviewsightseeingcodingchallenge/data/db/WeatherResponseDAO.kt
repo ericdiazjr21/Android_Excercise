@@ -1,4 +1,4 @@
-package ericdiaz.program.topviewsightseeingcodingchallenge.db
+package ericdiaz.program.topviewsightseeingcodingchallenge.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
