@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken
 import ericdiaz.program.topviewsightseeingcodingchallenge.model.CurrentWeather
 import ericdiaz.program.topviewsightseeingcodingchallenge.model.DailyForecast
 
-object WeatherDatabaseTypeConverters {
+class WeatherDatabaseTypeConverters {
 
     private val gson = Gson()
 
@@ -16,12 +16,12 @@ object WeatherDatabaseTypeConverters {
     }
 
     @TypeConverter
-    fun dailyForecaseDeserializer(cachedDailyForecast: String): DailyForecast {
+    fun dailyForecastDeserializer(cachedDailyForecast: String): DailyForecast {
         return gson.fromJson(cachedDailyForecast, object : TypeToken<DailyForecast>() {}.type)
     }
 
     @TypeConverter
-    fun currentWeatherSerailizer(currentWeather: CurrentWeather): String {
+    fun currentWeatherSerializer(currentWeather: CurrentWeather): String {
         return gson.toJson(currentWeather)
     }
 

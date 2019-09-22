@@ -1,15 +1,15 @@
 package ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
-import ericdiaz.program.topviewsightseeingcodingchallenge.di.WeatherApplication
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getLocation
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.isNetworkConnected
+import ericdiaz.program.topviewsightseeingcodingchallenge.model.WeatherResponse
+import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherDatabaseRepository
 import ericdiaz.program.topviewsightseeingcodingchallenge.repository.WeatherNetworkRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -20,8 +20,10 @@ import java.util.*
 import javax.inject.Inject
 
 
-class WeatherViewModel @Inject constructor(application: Application,
-    private val weatherNetworkRepository: WeatherNetworkRepository
+class WeatherViewModel @Inject constructor(
+    application: Application,
+    private val weatherNetworkRepository: WeatherNetworkRepository,
+    private val weatherDatabaseRepository: WeatherDatabaseRepository
 ) : AndroidViewModel(application) {
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -31,11 +33,11 @@ class WeatherViewModel @Inject constructor(application: Application,
         getWeather()
     }
 
-    fun getWeatherData():LiveData<State>{
+    fun getWeatherData(): LiveData<State> {
         return weatherData
     }
 
-    fun refreshWeatherData(){
+    fun refreshWeatherData() {
         getWeather()
     }
 
@@ -46,6 +48,8 @@ class WeatherViewModel @Inject constructor(application: Application,
             OnSuccessListener { location ->
                 if (location != null && applicationContext.isNetworkConnected()) {
                     getWeatherResponse(location.latitude, location.longitude)
+                } else {
+                    getCachedWeatherResponse()
                 }
             },
             OnFailureListener {
@@ -64,19 +68,47 @@ class WeatherViewModel @Inject constructor(application: Application,
                     response.currentWeather.date = DateFormat
                         .getDateTimeInstance()
                         .format(Date(response.currentWeather.unixTime.times(1000)))
+
+                    response.responseId = "Single_Entry_Response"
                 }
                 return@map response
             }
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess { response ->
+                run { cacheWeatherResponse(response) }
+            }
             .subscribeBy(
                 onSuccess = {
                     weatherData.value = State.Success(it, StateDescriptor.FROM_NETWORK)
                 },
-
                 onError = {
                     weatherData.value = State.Failure(it, StateDescriptor.NETWORK_ERROR)
                 })
         )
+    }
+
+    private fun cacheWeatherResponse(weatherResponse: WeatherResponse) {
+        disposables.add(
+            weatherDatabaseRepository
+                .insertWeatherResponse(weatherResponse)
+                .subscribeOn(Schedulers.io())
+                .subscribe()
+        )
+    }
+
+    private fun getCachedWeatherResponse() {
+        disposables.add(weatherDatabaseRepository
+            .getCachedWeatherResponse()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    weatherData.value = State.Success(it, StateDescriptor.FROM_DATABASE)
+                },
+                onError = {
+                    weatherData.value = State.Failure(it, StateDescriptor.NO_DATA_SOURCE_AVAILABLE)
+                }
+            ))
     }
 
     override fun onCleared() {

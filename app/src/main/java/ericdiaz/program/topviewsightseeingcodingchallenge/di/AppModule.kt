@@ -1,12 +1,14 @@
 package ericdiaz.program.topviewsightseeingcodingchallenge.di
 
+import android.content.Context
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
-import ericdiaz.program.topviewsightseeingcodingchallenge.view.WeatherActivity
+import dagger.Provides
 
 @Module
-abstract class AppModule {
+class AppModule {
 
-    @ContributesAndroidInjector
-    abstract fun bindWeatherActivity(): WeatherActivity
+    @Provides
+    fun providesContext(application: WeatherApplication): Context {
+        return application.applicationContext
+    }
 }
