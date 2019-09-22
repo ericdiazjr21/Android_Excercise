@@ -9,11 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import ericdiaz.program.topviewsightseeingcodingchallenge.R
-import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getHighTempFormat
 import ericdiaz.program.topviewsightseeingcodingchallenge.extensions.getTempFormat
 import ericdiaz.program.topviewsightseeingcodingchallenge.view.recyclerview.WeatherAdapter
+import ericdiaz.program.topviewsightseeingcodingchallenge.view.utils.WeatherIcons
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.State
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.StateDescriptor
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.WeatherViewModel
@@ -91,18 +92,26 @@ class WeatherActivity : AppCompatActivity() {
 
     private fun loadDataIntoViews(state: State.Success) {
 
-        if (state.stateDescriptor == StateDescriptor.FROM_DATABASE) {
-            showSnackBar(state.stateDescriptor)
+        with(state) {
+            val weatherResponse = this.weatherResponse
+
+            weatherResponse.currentWeather.let {
+                Picasso.get().load(WeatherIcons.weatherIconMap[it.iconId])
+                    .into(current_weather_icon_image_view)
+
+                last_updated_text_view.text = it.date
+
+                current_temperature_text_view.text = it.temperature.getTempFormat()
+            }
+
+            weatherResponse.let {
+                current_location_text_view.text = it.location
+                weatherAdapter.addData(it.dailyForecast.eightDayForecast)
+            }
+
+            showSnackBar(this.stateDescriptor)
         }
 
-        val weatherResponse = state.weatherResponse
-        val currentWeather = weatherResponse.currentWeather
-
-        current_location_text_view.text = weatherResponse.location
-        last_updated_text_view.text = currentWeather.date
-        current_temperature_text_view.text = currentWeather.temperature.getTempFormat()
-
-        weatherAdapter.addData(state.weatherResponse.dailyForecast.eightDayForecast)
     }
 
 
@@ -139,7 +148,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(loading_progress_bar, message, Snackbar.LENGTH_LONG)
+        Snackbar.make(loading_progress_bar, message, Snackbar.LENGTH_LONG).show()
     }
 
 }

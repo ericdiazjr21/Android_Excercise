@@ -10,7 +10,7 @@ sealed class State {
 
     data class Failure(
         val throwable: Throwable,
-        val stateDescriptor: String
+        val stateDescriptor: String = StateDescriptor.UNKNOWN_ERROR
     ) : State()
 
     object Loading : State()
@@ -18,10 +18,10 @@ sealed class State {
 
 object StateDescriptor {
 
-    const val NO_DATA_SOURCE_AVAILABLE = "no network or database data"
-    const val LOCATION_ERROR = "no location provided"
-    const val NETWORK_ERROR = "no network available"
-    const val UNKNOWN_ERROR = "no idea man"
-    const val FROM_DATABASE = "data came from database"
-    const val FROM_NETWORK = "data came from network"
+    const val NO_DATA_SOURCE_AVAILABLE = "No network or database data"
+    const val LOCATION_ERROR = "No location provided"
+    const val NETWORK_ERROR = "No network available"
+    const val UNKNOWN_ERROR = "No idea man"
+    const val FROM_DATABASE = "Data came from database"
+    const val FROM_NETWORK = "Data came from network"
 }
