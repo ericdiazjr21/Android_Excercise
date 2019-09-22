@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TopViewSightseeingCodingChallenge</string>
+    <string name="app_name">Weather App</string>
     <string name="icon">icon</string>
     <string name="no_location">Location not Available</string>
     <string name="data_error">Network/Database Error</string>
