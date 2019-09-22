@@ -35,6 +35,10 @@ class WeatherViewModel @Inject constructor(application: Application,
         return weatherData
     }
 
+    fun refreshWeatherData(){
+        getWeather()
+    }
+
     private fun getWeather() {
         val applicationContext = getApplication<Application>().applicationContext
 
@@ -51,6 +55,8 @@ class WeatherViewModel @Inject constructor(application: Application,
     }
 
     private fun getWeatherResponse(latitude: Double, longitude: Double) {
+        weatherData.value = State.Loading
+
         disposables.add(weatherNetworkRepository
             .getWeatherResponse(latitude, longitude)
             .map { response ->
