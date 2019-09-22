@@ -13,7 +13,8 @@
 
 ### Specifics 
 - This application was developed in Android Studio v 3.5
-- Application uses MVVM architecture 
+- Application uses MVVM architecture
+- Emulator should have play services setup 
 
 ### Features
 - Current weather information displayed at top of screen
@@ -22,3 +23,9 @@
 - Weather data aquired through Retofit GET
 - Data stored locally supporting offline mode
 - User location aquired from play services
+
+### Comments
+- Needs unit testing
+- Weather icon links are hard-coded, would prefer to extract to API
+- Dagger compilation issue due to kapt bug - refer to app build.gradle
+- Network error noted when using Pixel 2 API 25 on initial run after install
