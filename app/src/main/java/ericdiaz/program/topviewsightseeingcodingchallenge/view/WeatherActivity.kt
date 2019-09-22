@@ -5,9 +5,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.AndroidInjection
 import ericdiaz.program.topviewsightseeingcodingchallenge.R
+import ericdiaz.program.topviewsightseeingcodingchallenge.view.recyclerview.WeatherAdapter
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.State
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.StateDescriptor
 import ericdiaz.program.topviewsightseeingcodingchallenge.viewmodel.WeatherViewModel
@@ -20,11 +22,14 @@ class WeatherActivity : AppCompatActivity() {
     @Inject
     lateinit var weatherViewModelFactory: WeatherViewModelFactory
     private lateinit var weatherViewModel: WeatherViewModel
+    private lateinit var weatherAdapter: WeatherAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_layout)
-        AndroidInjection.inject(this)
+
+        initRecyclerView()
 
         weatherViewModel =
             ViewModelProviders.of(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
@@ -60,6 +65,15 @@ class WeatherActivity : AppCompatActivity() {
             })
     }
 
+    private fun initRecyclerView() {
+        weatherAdapter = WeatherAdapter()
+
+        daily_forecast_recycler_view.apply {
+            adapter = weatherAdapter
+            layoutManager = LinearLayoutManager(this@WeatherActivity)
+        }
+    }
+
     private fun loadDataIntoViews(state: State.Success) {
 
         if (state.stateDescriptor == StateDescriptor.FROM_DATABASE) {
@@ -72,6 +86,8 @@ class WeatherActivity : AppCompatActivity() {
         current_location_text_view.text = weatherResponse.location
         last_updated_text_view.text = currentWeather.date
         current_temperature_text_view.text = currentWeather.temperature.toString()
+
+        weatherAdapter.addData(state.weatherResponse.dailyForecast.eightDayForecast)
     }
 
 
