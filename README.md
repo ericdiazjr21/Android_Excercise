@@ -22,7 +22,7 @@
 - Referesh button to reload data
 - Weather data aquired through Retofit GET
 - Data stored locally supporting offline mode
-- User location aquired from play services
+- User location acquired from play services
 
 ### Comments
 - Needs unit testing
